@@ -4,6 +4,9 @@ inputs:
   arguments:
     description: "Gradle Arguments"
     required: true
+  github_token:
+    description: "secrets.GITHUB_TOKEN, for publishing"
+    required: true
 runs:
   using: composite
   steps:
@@ -20,4 +23,4 @@ runs:
         arguments: ${{ inputs.arguments }}
       env:
         USERNAME: ${{ github.actor }}
-        TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TOKEN: ${{ inputs.github_token }}
