@@ -1,0 +1,23 @@
+name: "Gradle"
+description: "Initialize Java and do Gradle Stuff!"
+inputs:
+  arguments:
+    description: "Gradle Arguments"
+    required: true
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-java@v3
+      with:
+        java-version: "17"
+        distribution: "temurin"
+        server-id: github
+        settings-path: ${{ github.workspace }}
+
+    - name: Do Gradle Things
+      uses: gradle/gradle-build-action@v2
+      with:
+        arguments: ${{ inputs.arguments }}
+      env:
+        USERNAME: ${{ github.actor }}
+        TOKEN: ${{ secrets.GITHUB_TOKEN }}
