@@ -7,6 +7,9 @@ inputs:
   github_token:
     description: "secrets.GITHUB_TOKEN, for publishing"
     required: true
+  gradle_version:
+    description: "Which Gradle version to use"
+    required: true
 runs:
   using: composite
   steps:
@@ -21,6 +24,7 @@ runs:
       uses: gradle/actions/setup-gradle@v3
       with:
         arguments: ${{ inputs.arguments }}
+        gradle-version: ${{ inputs.gradle_version }}
       env:
         USERNAME: ${{ github.actor }}
         TOKEN: ${{ inputs.github_token }}
